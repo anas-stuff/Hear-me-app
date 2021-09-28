@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">HearMe</string>
+    <string name="add_new_item_description">يمنك معاينة وإضافة عنصر إلي القائمة من خلال إختيار الصورة والصوت المناسبان من جهازك.</string>
+    <string name="add_sound">أضف صوت</string>
+    <string name="add_photo">أضف صورة</string>
+    <string name="submit">إضافة</string>
+    <string name="read_permission_needed_to_access_files">صلاحية الوصول لإلي الملفات مطلوبة لقرائة الصور والاصوات من جهازك</string>
+    <string name="select_picture">إختر صورة</string>
+    <string name="failed_to_get_photo">فشل الحصول علي الصورة</string>
+    <string name="select_audio">إختر صوت</string>
+    <string name="failed_to_get_sound">فشل الحصول علي الصوت</string>
+    <string name="select_picture_and_sound">يرجي اختيار شورة وصوت</string>
+</resources>
