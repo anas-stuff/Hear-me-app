@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
@@ -19,6 +20,7 @@ import android.widget.Toast;
 import com.barmej.hearme.adapter.PhotoSoundAdapter;
 import com.barmej.hearme.data.PhotoSound;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
@@ -28,6 +30,14 @@ public class MainActivity extends AppCompatActivity {
     private PhotoSoundAdapter mAdapter;
     Menu mMenu;
     private RecyclerView.LayoutManager mGridLayoutManager, mListLayoutManager;
+
+    private MediaPlayer mMediaPlayer;
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mMediaPlayer = new MediaPlayer();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,26 +107,36 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void playSound(int position){
-
+        PhotoSound photoSound = mItems.get(position);
+        try {
+            mMediaPlayer.reset();
+            mMediaPlayer.setDataSource(this, photoSound.getSound());
+            mMediaPlayer.prepare();
+            mMediaPlayer.start();
+        } catch (IOException e){
+            e.printStackTrace();
+            Toast.makeText(this, R.string.couldnt_play_sound, Toast.LENGTH_LONG).show();
+        }
     }
 
     private void deleteItem(int position){
         // Dialog
         AlertDialog alertDialog = new AlertDialog.Builder(this)
                 .setMessage(R.string.delete_confirmation)
-                .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        mItems.remove(position); // Remove item from array list
-                        mAdapter.notifyItemRemoved(position); // Notify adapter
-                    }
+                .setPositiveButton(R.string.yes, (dialogInterface, i) -> {
+                    mItems.remove(position); // Remove item from array list
+                    mAdapter.notifyItemRemoved(position); // Notify adapter
                 })
-                .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        dialogInterface.dismiss(); // Hide dialog
-                    }
+                .setNegativeButton(R.string.cancel, (dialogInterface, i) -> {
+                    dialogInterface.dismiss(); // Hide dialog
                 }).create();
         alertDialog.show();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mMediaPlayer.release();
+        mMediaPlayer = null;
     }
 }
