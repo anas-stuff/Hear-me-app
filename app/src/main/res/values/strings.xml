@@ -10,4 +10,12 @@
     <string name="select_audio">إختر صوت</string>
     <string name="failed_to_get_sound">فشل الحصول علي الصوت</string>
     <string name="select_picture_and_sound">يرجي اختيار شورة وصوت</string>
+    <string name="action_grid">عرض جدول</string>
+    <string name="action_list">عرض قائمة</string>
+    <string name="add_button">إضافة</string>
+    <string name="didnt_add_photo">لم يتم إختيار صورة او صوت</string>
+    <string name="delete_confirmation">هل أنت متأكد من ازالة العنصر؟</string>
+    <string name="yes">نعم</string>
+    <string name="cancel">إلغاء</string>
+    <string name="couldnt_play_sound">لم يتمكن التطبيق من تشغيل الصوت</string>
 </resources>
