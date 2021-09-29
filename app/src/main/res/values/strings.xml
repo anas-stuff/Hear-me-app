@@ -14,4 +14,7 @@
     <string name="action_list">عرض قائمة</string>
     <string name="add_button">إضافة</string>
     <string name="didnt_add_photo">لم يتم إختيار صورة او صوت</string>
+    <string name="delete_confirmation">هل أنت متأكد من ازالة العنصر؟</string>
+    <string name="yes">نعم</string>
+    <string name="cancel">إلغاء</string>
 </resources>

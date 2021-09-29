@@ -2,11 +2,13 @@ package com.barmej.hearme;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -99,6 +101,22 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void deleteItem(int position){
-
+        // Dialog
+        AlertDialog alertDialog = new AlertDialog.Builder(this)
+                .setMessage(R.string.delete_confirmation)
+                .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        mItems.remove(position); // Remove item from array list
+                        mAdapter.notifyItemRemoved(position); // Notify adapter
+                    }
+                })
+                .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss(); // Hide dialog
+                    }
+                }).create();
+        alertDialog.show();
     }
 }
