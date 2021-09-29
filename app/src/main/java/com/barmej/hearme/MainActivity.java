@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
 
         mRecyclerView = findViewById(R.id.recycler_view);
         mItems = new ArrayList<>();
-        mAdapter = new PhotoSoundAdapter(mItems);
+        mAdapter = new PhotoSoundAdapter(mItems, position -> playSound(position), position -> deleteItem(position));
 
         mGridLayoutManager = new GridLayoutManager(this, 2);
         mListLayoutManager = new LinearLayoutManager(this);
@@ -92,5 +92,13 @@ public class MainActivity extends AppCompatActivity {
              return true;
          }
          return super.onOptionsItemSelected(item);
+    }
+
+    private void playSound(int position){
+
+    }
+
+    private void deleteItem(int position){
+
     }
 }
