@@ -45,7 +45,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         mRecyclerView = findViewById(R.id.recycler_view);
-        mItems = new ArrayList<>();
+        // Set default list
+        mItems = PhotoSound.getDefaultList();
         mAdapter = new PhotoSoundAdapter(mItems, position -> playSound(position), position -> deleteItem(position));
 
         mGridLayoutManager = new GridLayoutManager(this, 2);
