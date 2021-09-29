@@ -12,4 +12,6 @@
     <string name="select_picture_and_sound">يرجي اختيار شورة وصوت</string>
     <string name="action_grid">عرض جدول</string>
     <string name="action_list">عرض قائمة</string>
+    <string name="add_button">إضافة</string>
+    <string name="didnt_add_photo">لم يتم إختيار صورة او صوت</string>
 </resources>

@@ -1,14 +1,18 @@
 package com.barmej.hearme;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.barmej.hearme.adapter.PhotoSoundAdapter;
 import com.barmej.hearme.data.PhotoSound;
@@ -37,6 +41,34 @@ public class MainActivity extends AppCompatActivity {
 
         mRecyclerView.setLayoutManager(mListLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
+
+        // Add button click listener
+        findViewById(R.id.floating_button_add).setOnClickListener(listener -> startAddNewPhotoActivity());
+    }
+
+    private void startAddNewPhotoActivity(){
+        Intent intent = new Intent(this, AddNewPhotoActivity.class);
+        startActivityForResult(intent, Constants.ADD_PHOTO);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == Constants.ADD_PHOTO){
+            if(resultCode == RESULT_OK && data != null) {
+                Uri photoUri = data.getParcelableExtra(Constants.EXTRA_PHOTO_URI);
+                Uri soundUri = data.getParcelableExtra(Constants.EXTRA_SOUND_URI);
+
+                addItem(new PhotoSound(photoUri, soundUri));
+            } else {
+                Toast.makeText(this, R.string.didnt_add_photo, Toast.LENGTH_LONG).show();
+            }
+        }
+    }
+
+    private void addItem(PhotoSound photoSound){
+        mItems.add(photoSound); // Add item to array list
+        mAdapter.notifyItemInserted(mItems.size() - 1); // Notify adapter
     }
 
     @Override
